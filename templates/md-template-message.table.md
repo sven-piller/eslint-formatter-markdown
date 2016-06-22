@@ -1,0 +1,1 @@
+| ```<%= severityName %>``` | <%= lineNumber %>:<%= columnNumber %> | <%- message %> | [<%= ruleId %>](http://eslint.org/docs/rules/<%= ruleId %>) |
