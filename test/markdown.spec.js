@@ -347,4 +347,68 @@ context('File tests', function () {
       testRegex(output, '/quotes', true, 1);
     });
   });
+
+  describe('Testing all files together', function () {
+    before(function (done) {
+      report = engine.executeOnFiles([
+        path.join(dir.fixtures, dir.green),
+        path.join(dir.fixtures, dir.yellow),
+        path.join(dir.fixtures, dir.red),
+        path.join(dir.fixtures, dir.orange)
+      ]);
+      output = formatter(report.results);
+      done();
+    });
+
+    after(function (done) {
+      report = null;
+      output = null;
+      done();
+    });
+
+    it('should have processed four files', function () {
+      testRegex(output, '_file.js', true, 4);
+    });
+
+    it('should have error messages', function () {
+      assert.strictEqual(report.errorCount, 2);
+      testRegex(output, '```Error```', true, 2);
+    });
+
+    it('should have warning messages', function () {
+      assert.strictEqual(report.warningCount, 6);
+      testRegex(output, '```Warning```', true, 6);
+    });
+
+    it('should have correct summary', function () {
+      testRegex(output, '# ESLint Report - OK', false);
+      testRegex(output, '# ESLint Report - Warning', false);
+      testRegex(output, '# ESLint Report - Error', true);
+      testRegex(output, '8 problems \\(2 errors, 6 warnings\\)', true);
+    });
+
+    it('should have correct file summary', function () {
+      testRegex(output, dir.green + ' - 0 problems', true);
+      testRegex(output, dir.yellow + ' - 3 problems \\(0 errors, 3 warnings\\)', true);
+      testRegex(output, dir.red + ' - 1 problem \\(1 error, 0 warnings\\)', true);
+      testRegex(output, dir.orange + ' - 4 problems \\(1 error, 3 warnings\\)', true);
+    });
+
+    it('should have table header', function () {
+      testRegex(output, '\\| Type \\| Line \\| Description \\| Rule \\|', true, 3);
+      testRegex(output, '\\| --- \\| --- \\| --- \\| --- \\|', true, 3);
+    });
+
+    it('should have trailing whitespace warning', function () {
+      testRegex(output, '/no-trailing-spaces', true, 4);
+    });
+
+    it('should have indentation warning', function () {
+      testRegex(output, '/indent', true, 2);
+    });
+
+    it('should have quotes error', function () {
+      testRegex(output, '/quotes', true, 2);
+    });
+  });
 });
