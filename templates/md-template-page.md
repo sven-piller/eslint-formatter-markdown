@@ -1,6 +1,6 @@
-# ESLint Report
+# ESLint Report - <%= reportColor %>
 
-## Summary: ```<%= reportColor %>```
+## Summary
 
 <%= reportSummary %>
 

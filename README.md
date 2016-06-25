@@ -1,12 +1,14 @@
-# markdown-reporter
-Markdown reporter for eslint
+# eslint-formatter-markdown [![Build Status](https://travis-ci.org/sven-piller/eslint-formatter-markdown.png?branch=master)](https://travis-ci.org/sven-piller/eslint-formatter-markdown)
 
-## Install
+Markdown ESLint formatter (reporter)
 
-```bash
-$ npm install --save-dev eslint-formatter-markdown
+## Installation
+
+Download node at [nodejs.org](http://nodejs.org) and install it, if you haven't already.
+
+```sh
+npm install eslint-formatter-markdown --save-dev
 ```
-
 
 ## Getting started
 
@@ -36,9 +38,20 @@ grunt.registerTask('default', ['eslint']);
 
 ## Tests
 
-  npm test
+```sh
+npm install
+npm test
+```
 
-At the moment the tests are not working or missing.
+## Dependencies
+
+None
+
+## Dev Dependencies
+
+- [chalk](https://github.com/chalk/chalk): Terminal string styling done right. Much color.
+- [eslint](https://github.com/eslint/eslint): An AST-based pattern checker for JavaScript.
+- [mocha](https://github.com/mochajs/mocha): simple, flexible, fun test framework
 
 ## Contributing
 
@@ -46,8 +59,8 @@ Feel free to contribute!
 
 ## Release History
 
+* 0.9.1 Improvements in Documentation, [Issue #2](https://github.com/sven-piller/eslint-formatter-markdown/issues/2)
 * 0.9.0 Initial release
-
 
 ## License
 
