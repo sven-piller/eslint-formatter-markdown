@@ -411,4 +411,38 @@ context('File tests', function () {
       testRegex(output, '/quotes', true, 2);
     });
   });
+
+  describe.only('Testing sorting', function () {
+    before(function (done) {      
+      done();
+    });
+
+    after(function (done) {
+      report = null;
+      output = null;
+      done();
+    });
+
+    it('should have errors first (yellow and red)', function () {
+      report = engine.executeOnFiles([
+        path.join(dir.fixtures, dir.yellow),
+        path.join(dir.fixtures, dir.red)
+      ]);      
+      output = formatter(report.results);
+      testRegex(output, '```Error```[^]+?```Warning```', true, 1);
+      testRegex(output, '```Warning```[^]+?```Error```', false);
+    });
+
+    it('should have errors first (all files)', function () {
+      report = engine.executeOnFiles([
+        path.join(dir.fixtures, dir.yellow),
+        path.join(dir.fixtures, dir.red),
+        path.join(dir.fixtures, dir.orange),
+        path.join(dir.fixtures, dir.green)
+      ]);      
+      output = formatter(report.results);
+      testRegex(output, '```Error```[^]+?```Warning```', true, 1);
+      testRegex(output, '```Warning```[^]+?```Error```', false);
+    });
+  });
 });
