@@ -36,6 +36,9 @@ grunt.loadNpmTasks('grunt-eslint');
 grunt.registerTask('default', ['eslint']);
 ```
 
+### Example Output (rendered by github)
+![Example report](/doc/example_report.png)
+
 ## Tests
 
 ```sh
