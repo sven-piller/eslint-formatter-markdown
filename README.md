@@ -1,6 +1,12 @@
-# eslint-formatter-markdown [![Build Status](https://travis-ci.org/sven-piller/eslint-formatter-markdown.png?branch=master)](https://travis-ci.org/sven-piller/eslint-formatter-markdown)
+# eslint-formatter-markdown
 
 Markdown ESLint formatter (reporter)
+
+[![Build Status](https://travis-ci.org/sven-piller/eslint-formatter-markdown.png?branch=master)](https://travis-ci.org/sven-piller/eslint-formatter-markdown)
+[![npm version](https://img.shields.io/npm/v/eslint-formatter-markdown.svg)](https://www.npmjs.com/package/eslint-formatter-markdown)
+[![Downloads/month](https://img.shields.io/npm/dm/eslint-formatter-markdown.svg)](https://www.npmjs.com/package/eslint-formatter-markdown)
+[![Dependency Status](https://david-dm.org/sven-piller/eslint-formatter-markdown.svg)](https://david-dm.org/sven-piller/eslint-formatter-markdown)
+
 
 ## Installation
 
