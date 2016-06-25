@@ -52,7 +52,9 @@ None
 
 ## Dev Dependencies
 
+- [chai](https://github.com/chaijs/chai): BDD/TDD assertion library for node.js and the browser. Test framework agnostic.
 - [eslint](https://github.com/eslint/eslint): An AST-based pattern checker for JavaScript.
+- [lodash](https://github.com/lodash/lodash): Lodash modular utilities.
 - [mocha](https://github.com/mochajs/mocha): simple, flexible, fun test framework
 
 ## Contributing
@@ -61,8 +63,9 @@ Feel free to contribute!
 
 ## Release History
 
-* 0.9.1 Improvements in Documentation, [Issue #2](https://github.com/sven-piller/eslint-formatter-markdown/issues/2)
-* 0.9.0 Initial release
+- 0.10.0 Added Tests
+- 0.9.1 Improvements in Documentation, [Issue #2](https://github.com/sven-piller/eslint-formatter-markdown/issues/2)
+- 0.9.0 Initial release
 
 ## License
 
