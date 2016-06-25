@@ -7,19 +7,19 @@ it('should be green', function () {
 });
 
 
-it('should be used by ESLint', function () {
-	var ret = false;
-	var _log = console.log;
+// it('should be used by ESLint', function () {
+// 	var ret = false;
+// 	var _log = console.log;
 
-	console.log = function (str) {
-		_log(str);
+// 	console.log = function (str) {
+// 		_log(str);
 
-		if (/# ESLint Report/ig.test(str)) {
-			ret = true;
-		}
-	}
+// 		if (/# ESLint Report/ig.test(str)) {
+// 			ret = true;
+// 		}
+// 	}
 
-	eslint.execute(['--format', './markdown.js', './markdown.js']);
-	console.log = _log;
-	assert(ret);
-});
+// 	eslint.execute(['--format', './markdown.js', './markdown.js']);
+// 	console.log = _log;
+// 	assert(ret);
+// });

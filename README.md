@@ -49,7 +49,6 @@ None
 
 ## Dev Dependencies
 
-- [chalk](https://github.com/chalk/chalk): Terminal string styling done right. Much color.
 - [eslint](https://github.com/eslint/eslint): An AST-based pattern checker for JavaScript.
 - [mocha](https://github.com/mochajs/mocha): simple, flexible, fun test framework
 
