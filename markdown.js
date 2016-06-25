@@ -4,19 +4,27 @@
  */
 'use strict';
 
+/* eslint no-sync: 0, func-names:0 */
 var lodash = require('lodash');
 var fs = require('fs');
 var path = require('path');
+
+var files = {
+  tmplPage: 'templates/md-template-page.md',
+  tmplResult: 'templates/md-template-result.md',
+  tmplTH: 'templates/md-template-message.table-header.md',
+  tmplTR: 'templates/md-template-message.table-row.md'
+};
 
 
 //------------------------------------------------------------------------------
 // Helpers
 //------------------------------------------------------------------------------
 
-var pageTemplate = lodash.template(fs.readFileSync(path.join(__dirname, 'templates/md-template-page.md'), 'utf-8'));
-var resultTemplate = lodash.template(fs.readFileSync(path.join(__dirname, 'templates/md-template-result.md'), 'utf-8'));
-var tableHeaderTemplate = lodash.template(fs.readFileSync(path.join(__dirname, 'templates/md-template-message.table-header.md'), 'utf-8'));
-var tableRowTemplate = lodash.template(fs.readFileSync(path.join(__dirname, 'templates/md-template-message.table-row.md'), 'utf-8'));
+var pageTemplate = lodash.template(fs.readFileSync(path.join(__dirname, files.tmplPage), 'utf-8'));
+var resultTemplate = lodash.template(fs.readFileSync(path.join(__dirname, files.tmplResult), 'utf-8'));
+var tableHeaderTemplate = lodash.template(fs.readFileSync(path.join(__dirname, files.tmplTH), 'utf-8'));
+var tableRowTemplate = lodash.template(fs.readFileSync(path.join(__dirname, files.tmplTR), 'utf-8'));
 
 /**
  * Given a word and a count, append an s if count is not one.
@@ -81,6 +89,32 @@ function renderHeaders(messages) {
   return (messages.length) ? tableHeaderTemplate() : '';
 }
 
+/**
+ * Sorts the result files after severity in following order:
+ *
+ *   - Error
+ *   - Warning
+ *
+ * @param {Array}   messages  Messages.
+ * @returns {Array}           Sorted messages.
+ */
+function sortMessages(messages) {
+  var fileArray = {
+    error: [],
+    warning: []
+  };
+
+  messages.forEach(function (message) {
+    if (message.severity === 1) {
+      fileArray.warning.push(message);
+    } else {
+      fileArray.error.push(message);
+    }
+  });
+
+  return lodash.concat(fileArray.error, fileArray.warning);
+}
+
 
 /**
  * Get MARKDOWN (table rows) describing the messages.
@@ -89,6 +123,7 @@ function renderHeaders(messages) {
  * @returns {string} MARKDOWN (table rows) describing the messages.
  */
 function renderMessages(messages, parentIndex) {
+  messages = sortMessages(messages);
 
   /**
    * Get MARKDOWN (table row) describing a message.
@@ -96,11 +131,8 @@ function renderMessages(messages, parentIndex) {
    * @returns {string} MARKDOWN (table row) describing a message.
    */
   return lodash.map(messages, function (message) {
-    var lineNumber,
-      columnNumber;
-
-    lineNumber = message.line || 0;
-    columnNumber = message.column || 0;
+    var lineNumber = message.line || 0;
+    var columnNumber = message.column || 0;
 
     return tableRowTemplate({
       parentIndex: parentIndex,
@@ -130,22 +162,48 @@ function renderResults(results) {
   }).join('\n');
 }
 
+/**
+ * Sorts the result files after severity in following order:
+ *
+ *   - Error
+ *   - Warning
+ *   - Clean
+ *
+ * @param {Array}    results  results
+ * @returns {Array}           sorted results
+ */
+function sortResults(results) {
+  var fileArray = {
+    error: [],
+    warning: [],
+    clean: []
+  };
+  results.forEach(function (result) {
+    if (result.errorCount > 0) {
+      fileArray.error.push(result);
+    } else if (result.warningCount > 0) {
+      fileArray.warning.push(result);
+    } else {
+      fileArray.clean.push(result);
+    }
+  });
+  return lodash.concat(fileArray.error, fileArray.warning, fileArray.clean);
+}
+
 //------------------------------------------------------------------------------
 // Public Interface
 //------------------------------------------------------------------------------
 
 module.exports = function (results) {
-  var totalErrors,
-    totalWarnings;
-
-  totalErrors = 0;
-  totalWarnings = 0;
+  var totalErrors = 0;
+  var totalWarnings = 0;
 
   // Iterate over results to get totals
   results.forEach(function (result) {
     totalErrors += result.errorCount;
     totalWarnings += result.warningCount;
   });
+  results = sortResults(results);
 
   return pageTemplate({
     date: new Date(),
