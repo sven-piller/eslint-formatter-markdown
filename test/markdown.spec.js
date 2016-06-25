@@ -9,7 +9,8 @@ var path = require('path');
 
 var dir = {
   fixtures: path.join(__dirname, '/fixtures'),
-  formatter: path.join(__dirname, '../markdown.js')
+  formatter: path.join(__dirname, '../markdown.js'),
+  green: 'green_file.js'
 };
 
 var engine = null;
@@ -57,7 +58,13 @@ context('Init', function () {
   });
 
   describe('All necessary fixture files exist', function () {
-
+    it('green_file.js exists', function (done) {
+      fs.readdir(dir.fixtures, function (err, files) {
+        if (err) throw err;
+        assert(files.indexOf(dir.green) !== -1);
+        done();
+      });
+    });
   });
 });
 
@@ -89,4 +96,62 @@ context('File tests', function () {
     formatter = null;
     done();
   });
+
+  describe('Testing green_file.js', function () {
+    before(function (done) {
+      report = engine.executeOnFiles([path.join(dir.fixtures, dir.green)]);
+      output = formatter(report.results);
+      done();
+    });
+
+    after(function (done) {
+      report = null;
+      output = null;
+      done();
+    });
+
+    it('should have processed one files', function () {
+      testRegex(output, '_file.js', true, 1);
+    });
+
+    it('should have no error messages', function () {
+      assert.strictEqual(report.errorCount, 0);
+      testRegex(output, '```Error```', false, 0);
+    });
+
+    it('should have no warning messages', function () {
+      assert.strictEqual(report.warningCount, 0);
+      testRegex(output, '```Warning```', false, 0);
+    });
+
+    it('should have correct summary', function () {
+      testRegex(output, '# ESLint Report - OK', true);
+      testRegex(output, '# ESLint Report - Warning', false);
+      testRegex(output, '# ESLint Report - Error', false);
+      testRegex(output, '0 problems', true);
+    });
+
+    it('should have correct file summary', function () {
+      testRegex(output, dir.green + ' - 0 problems', true);
+    });
+
+    it('should have no table header', function () {
+      testRegex(output, '\\| Type \\| Line \\| Description \\| Rule \\|', false);
+      testRegex(output, '\\| --- \\| --- \\| --- \\| --- \\|', false);
+    });
+
+    it('should have no trailing whitespace warning', function () {
+      testRegex(output, '/no-trailing-spaces', false);
+    });
+
+    it('should have no indentation warning', function () {
+      testRegex(output, '/indent', false);
+    });
+
+    it('should have no quotes error', function () {
+      testRegex(output, '/quotes', false);
+    });
+  });
+
+
 });
