@@ -1,11 +1,12 @@
 {
   "name": "eslint-formatter-markdown",
-  "version": "0.9.1",
+  "version": "0.10.0",
   "description": "Markdown ESLint formatter (reporter)",
   "main": "index.js",
   "scripts": {
     "test": "mocha",
-    "selftest": "eslint --format .\\markdown.js *.js > .\\test\\example_report.md"
+    "eslint": "eslint --format .\\markdown.js **\\*.js > report.md || exit 0",
+    "debug": "mocha --debug-brk"
   },
   "repository": {
     "type": "git",
@@ -33,7 +34,9 @@
     "node": ">=0.12.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "eslint": "^2.13.1",
+    "lodash": "^4.13.1",
     "mocha": "^2.5.3"
   }
 }
