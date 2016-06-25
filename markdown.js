@@ -14,9 +14,9 @@ var path = require('path');
 //------------------------------------------------------------------------------
 
 var pageTemplate = lodash.template(fs.readFileSync(path.join(__dirname, 'templates/md-template-page.md'), 'utf-8'));
-var messageTemplate = lodash.template(fs.readFileSync(path.join(__dirname, 'templates/md-template-message.table.md'), 'utf-8'));
 var resultTemplate = lodash.template(fs.readFileSync(path.join(__dirname, 'templates/md-template-result.md'), 'utf-8'));
-
+var tableHeaderTemplate = lodash.template(fs.readFileSync(path.join(__dirname, 'templates/md-template-message.table-header.md'), 'utf-8'));
+var tableRowTemplate = lodash.template(fs.readFileSync(path.join(__dirname, 'templates/md-template-message.table-row.md'), 'utf-8'));
 
 /**
  * Given a word and a count, append an s if count is not one.
@@ -59,6 +59,9 @@ function renderColor(totalErrors, totalWarnings) {
   return 0;
 }
 
+
+var SEVERTITY_NAME = ['OK', 'Warning', 'Error'];
+
 /**
  * Get the color based on whether there are errors/warnings...
  * @param {string} totalErrors Total errors
@@ -66,13 +69,18 @@ function renderColor(totalErrors, totalWarnings) {
  * @returns {string} The color code ('' = green, 'Warning' = yellow, 'Error' = red)
  */
 function renderSummaryColor(totalErrors, totalWarnings) {
-  if (totalErrors !== 0) {
-    return 'Error';
-  } else if (totalWarnings !== 0) {
-    return 'Warning';
-  }
-  return '';
+  return SEVERTITY_NAME[renderColor(totalErrors, totalWarnings)];
 }
+
+/**
+ * Get table header for the message table.
+ * @param {Array} messages Messages.
+ * @returns {string} markdown (table header)
+ */
+function renderHeaders(messages) {
+  return (messages.length) ? tableHeaderTemplate() : '';
+}
+
 
 /**
  * Get MARKDOWN (table rows) describing the messages.
@@ -94,7 +102,7 @@ function renderMessages(messages, parentIndex) {
     lineNumber = message.line || 0;
     columnNumber = message.column || 0;
 
-    return messageTemplate({
+    return tableRowTemplate({
       parentIndex: parentIndex,
       lineNumber: lineNumber,
       columnNumber: columnNumber,
@@ -118,7 +126,7 @@ function renderResults(results) {
       filePath: result.filePath,
       summary: renderSummary(result.errorCount, result.warningCount)
 
-    }) + renderMessages(result.messages, index);
+    }) + renderHeaders(result.messages) + renderMessages(result.messages, index);
   }).join('\n');
 }
 
