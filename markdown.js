@@ -75,17 +75,17 @@ function renderSummaryColor(totalErrors, totalWarnings) {
 }
 
 /**
- * Get HTML (table rows) describing the messages.
+ * Get MARKDOWN (table rows) describing the messages.
  * @param {Array} messages Messages.
- * @param {int} parentIndex Index of the parent HTML row.
- * @returns {string} HTML (table rows) describing the messages.
+ * @param {int} parentIndex Index of the parent MARKDOWN row.
+ * @returns {string} MARKDOWN (table rows) describing the messages.
  */
 function renderMessages(messages, parentIndex) {
 
   /**
-   * Get HTML (table row) describing a message.
+   * Get MARKDOWN (table row) describing a message.
    * @param {Object} message Message.
-   * @returns {string} HTML (table row) describing a message.
+   * @returns {string} MARKDOWN (table row) describing a message.
    */
   return lodash.map(messages, function (message) {
     var lineNumber,
@@ -108,7 +108,7 @@ function renderMessages(messages, parentIndex) {
 
 /**
  * @param {Array} results Test results.
- * @returns {string} HTML string describing the results.
+ * @returns {string} MARKDOWN string describing the results.
  */
 function renderResults(results) {
   return lodash.map(results, function (result, index) {
