@@ -4,6 +4,8 @@
 
 <%= reportSummary %>
 
+<%= stats %>
+
 ## Details
 
 <%= results %>

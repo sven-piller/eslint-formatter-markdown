@@ -412,7 +412,7 @@ context('File tests', function () {
     });
   });
 
-  describe.only('Testing sorting', function () {
+  describe('Testing sorting', function () {
     before(function (done) {      
       done();
     });
