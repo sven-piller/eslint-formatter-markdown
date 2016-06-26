@@ -93,10 +93,8 @@ context('Init', function () {
       });
     });
   });
-});
 
-context('Formatter tests', function () {
-  describe('Loading formatters', function () {
+  describe('Formatter tests', function () {
     it('load "compact" formatter (buildin)', function () {
       var engine1 = new CLIEngine();
       var formatter1 = engine1.getFormatter('compact');
@@ -411,13 +409,23 @@ context('File tests', function () {
       testRegex(output, '/quotes', true, 2);
     });
   });
+});
 
-  describe.only('Testing sorting', function () {
-    before(function (done) {      
-      done();
-    });
+context('Functionality tests', function () {
+  before(function (done) {
+    engine = new CLIEngine();
+    formatter = engine.getFormatter(dir.formatter);
+    done();
+  });
 
-    after(function (done) {
+  after(function (done) {
+    engine = null;
+    formatter = null;
+    done();
+  });
+
+  describe('Testing sorting', function () {
+    afterEach(function (done) {
       report = null;
       output = null;
       done();
@@ -427,7 +435,7 @@ context('File tests', function () {
       report = engine.executeOnFiles([
         path.join(dir.fixtures, dir.yellow),
         path.join(dir.fixtures, dir.red)
-      ]);      
+      ]);
       output = formatter(report.results);
       testRegex(output, '```Error```[^]+?```Warning```', true, 1);
       testRegex(output, '```Warning```[^]+?```Error```', false);
@@ -439,10 +447,86 @@ context('File tests', function () {
         path.join(dir.fixtures, dir.red),
         path.join(dir.fixtures, dir.orange),
         path.join(dir.fixtures, dir.green)
-      ]);      
+      ]);
       output = formatter(report.results);
       testRegex(output, '```Error```[^]+?```Warning```', true, 1);
       testRegex(output, '```Warning```[^]+?```Error```', false);
+    });
+  });
+
+  describe('Testing stats', function () {
+    afterEach(function (done) {
+      report = null;
+      output = null;
+      done();
+    });
+
+    it('should have no warnings and errors (green)', function () {
+      report = engine.executeOnFiles([
+        path.join(dir.fixtures, dir.green)
+      ]);
+      output = formatter(report.results);
+      testRegex(output, '### Errors', false);
+      testRegex(output, '### Warnings', false);
+      testRegex(output, '\\| rule \\| count \\| visual \\|', false);
+      testRegex(output, '\\| quotes \\| 1 \\| X \\|', false);
+      testRegex(output, '\\| no-trailing-spaces \\| 2 \\| XX \\|', false);
+      testRegex(output, '\\| indent \\| 1 \\| X \\|', false);
+    });
+
+    it('should have warnings (yellow)', function () {
+      report = engine.executeOnFiles([
+        path.join(dir.fixtures, dir.yellow)
+      ]);
+      output = formatter(report.results);
+      testRegex(output, '### Errors', false);
+      testRegex(output, '### Warnings', true, 1);
+      testRegex(output, '\\| rule \\| count \\| visual \\|', true, 1);
+      testRegex(output, '\\| quotes \\| 1 \\| X \\|', false);
+      testRegex(output, '\\| no-trailing-spaces \\| 2 \\| XX \\|', true, 1);
+      testRegex(output, '\\| indent \\| 1 \\| X \\|', true, 1);
+    });
+
+    it('should have errors (red)', function () {
+      report = engine.executeOnFiles([
+        path.join(dir.fixtures, dir.red)
+      ]);
+      output = formatter(report.results);
+      testRegex(output, '### Errors', true, 1);
+      testRegex(output, '### Warnings', false);
+      testRegex(output, '\\| rule \\| count \\| visual \\|', true, 1);
+      testRegex(output, '\\| quotes \\| 1 \\| X \\|', true, 1);
+      testRegex(output, '\\| no-trailing-spaces \\| 2 \\| XX \\|', false);
+      testRegex(output, '\\| indent \\| 1 \\| X \\|', false);
+    });
+
+    it('should have errors and warnings (orange)', function () {
+      report = engine.executeOnFiles([
+        path.join(dir.fixtures, dir.orange)
+      ]);
+      output = formatter(report.results);
+      testRegex(output, '### Errors', true, 1);
+      testRegex(output, '### Warnings', true, 1);
+      testRegex(output, '\\| rule \\| count \\| visual \\|', true, 2);
+      testRegex(output, '\\| quotes \\| 1 \\| X \\|', true, 1);
+      testRegex(output, '\\| no-trailing-spaces \\| 2 \\| XX \\|', true, 1);
+      testRegex(output, '\\| indent \\| 1 \\| X \\|', true, 1);
+    });
+
+    it('should have errors and warnings (all files)', function () {
+      report = engine.executeOnFiles([
+        path.join(dir.fixtures, dir.yellow),
+        path.join(dir.fixtures, dir.red),
+        path.join(dir.fixtures, dir.orange),
+        path.join(dir.fixtures, dir.green)
+      ]);
+      output = formatter(report.results);
+      testRegex(output, '### Errors', true, 1);
+      testRegex(output, '### Warnings', true, 1);
+      testRegex(output, '\\| rule \\| count \\| visual \\|', true, 2);
+      testRegex(output, '\\| quotes \\| 2 \\| XX \\|', true, 1);
+      testRegex(output, '\\| no-trailing-spaces \\| 4 \\| XXXX \\|', true, 1);
+      testRegex(output, '\\| indent \\| 2 \\| XX \\|', true, 1);
     });
   });
 });

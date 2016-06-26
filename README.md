@@ -69,6 +69,8 @@ Feel free to contribute!
 
 ## Release History
 
+- 1.0.0 Release with Stats in Summary
+- 0.11.0 Added Sorting
 - 0.10.0 Added Tests
 - 0.9.1 Improvements in Documentation, [Issue #2](https://github.com/sven-piller/eslint-formatter-markdown/issues/2)
 - 0.9.0 Initial release

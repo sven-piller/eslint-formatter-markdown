@@ -13,7 +13,9 @@ var files = {
   tmplPage: 'templates/md-template-page.md',
   tmplResult: 'templates/md-template-result.md',
   tmplTH: 'templates/md-template-message.table-header.md',
-  tmplTR: 'templates/md-template-message.table-row.md'
+  tmplTR: 'templates/md-template-message.table-row.md',
+  tmplStats: 'templates/md-template-stats.md',
+  tmplStatsRow: 'templates/md-template-stats-row.md'
 };
 
 
@@ -25,6 +27,8 @@ var pageTemplate = lodash.template(fs.readFileSync(path.join(__dirname, files.tm
 var resultTemplate = lodash.template(fs.readFileSync(path.join(__dirname, files.tmplResult), 'utf-8'));
 var tableHeaderTemplate = lodash.template(fs.readFileSync(path.join(__dirname, files.tmplTH), 'utf-8'));
 var tableRowTemplate = lodash.template(fs.readFileSync(path.join(__dirname, files.tmplTR), 'utf-8'));
+var statsTemplate = lodash.template(fs.readFileSync(path.join(__dirname, files.tmplStats), 'utf-8'));
+var statsRowTemplate = lodash.template(fs.readFileSync(path.join(__dirname, files.tmplStatsRow), 'utf-8'));
 
 /**
  * Given a word and a count, append an s if count is not one.
@@ -50,6 +54,58 @@ function renderSummary(totalErrors, totalWarnings) {
     renderedText += ' (' + totalErrors + ' ' + pluralize('error', totalErrors) + ', ' + totalWarnings + ' ' + pluralize('warning', totalWarnings) + ')';
   }
   return renderedText;
+}
+
+/**
+ * Renders MARKDOWN for stats
+ * @param {Object} stats the rules and their stats
+ * @returns {string} The formatted string, pluralized where necessary
+ */
+function renderStats(stats) {
+
+  /**
+   * Creates table Header if necessary
+   * @param {string} type error or warning
+   * @returns {string} The formatted string
+   */
+  function injectHeader(type) {
+    return (stats[type]) ? '| rule | count | visual |\n| --- | --- | --- |\n' : '';
+  }
+
+  /**
+   * renders templates for each rule
+   * @param {string} type error or warning
+   * @returns {string} The formatted string, pluralized where necessary
+   */
+  function output(type) {
+    var statstype = stats[type];
+    return injectHeader(type) + lodash.map(statstype, function (ruleStats, ruleId) {
+      return statsRowTemplate({
+        ruleId: ruleId,
+        ruleCount: ruleStats,
+        visual: lodash.repeat('X', lodash.min([ruleStats, 20]))
+      });
+    }, '').join('');
+  }
+
+  /**
+   * render template for severity
+   * @param {string} type severity
+   * @returns {string} template
+   */
+  function renderTemplate(type) {
+    var lcType = lodash.lowerCase(type);
+    if (lodash.size(stats[lcType])) {
+      return statsTemplate({
+        title: '### ' + type,
+        items: output(lcType)
+      });
+    } else {
+      return '';
+    }
+  }
+
+  return renderTemplate('Errors') + renderTemplate('Warnings');
 }
 
 /**
@@ -190,6 +246,35 @@ function sortResults(results) {
   return lodash.concat(fileArray.error, fileArray.warning, fileArray.clean);
 }
 
+/**
+ * Calculate stats
+ * @param {Array}    results  results
+ * @returns {Object} stats
+ */
+function getStats(results) {
+
+  /**
+   * calculate stats for each severity
+   * @param {string} type  severity
+   * @returns {Object} stats
+   */
+  function filterMessages(type) {
+    return lodash(results)
+      .map('messages')
+      .flatten()
+      .filter(function (message) { return message.severity === type; })
+      .groupBy('ruleId')
+      .mapValues(function (ruleMessages) {
+        return ruleMessages.length;
+      })
+      .value();
+  }
+  return {
+    errors: filterMessages(2),
+    warnings: filterMessages(1)
+  };
+}
+
 //------------------------------------------------------------------------------
 // Public Interface
 //------------------------------------------------------------------------------
@@ -197,6 +282,9 @@ function sortResults(results) {
 module.exports = function (results) {
   var totalErrors = 0;
   var totalWarnings = 0;
+  var stats = getStats(results);
+
+  // console.log(stats);
 
   // Iterate over results to get totals
   results.forEach(function (result) {
@@ -209,6 +297,7 @@ module.exports = function (results) {
     date: new Date(),
     reportColor: renderSummaryColor(totalErrors, totalWarnings),
     reportSummary: renderSummary(totalErrors, totalWarnings),
-    results: renderResults(results)
+    results: renderResults(results),
+    stats: renderStats(stats)
   });
 };
