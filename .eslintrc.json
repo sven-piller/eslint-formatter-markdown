@@ -163,10 +163,7 @@
     "lines-around-comment": 1, // require empty lines around comments  
     "max-nested-callbacks": 0, // specify the maximum depth callbacks can be nested (off by default)   
     "max-depth": [1, 3], // enforce a maximum depth that blocks can be nested
-    "max-len": [1, 120, { 
-      "ignoreComments": true, 
-      "ignoreTrailingComments": true 
-    }], // enforce a maximum line length
+    "max-len": 120, // enforce a maximum line length
     "max-statements": [1, 15], // enforce a statement length
     "max-statements-per-line": [1,  { "max": 2 }], // enforce a maximum number of statements allowed per line
     "new-cap": 1, // require a capital letter for constructors
