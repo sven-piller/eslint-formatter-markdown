@@ -199,7 +199,7 @@
     "operator-linebreak": 1, // Operator Linebreak 
     "padded-blocks": 0, // enforce padding within blocks (off by default)
     "quote-props": [2, "as-needed"], // require quotes around object literal property names (off by default)
-    "quotes": [2, "single", { "avoidEscape": true }], // specify whether double or single quotes should be used
+    "quotes": [2], // specify whether double or single quotes should be used
     "require-jsdoc": 2, // Require JSDoc comment
     "semi": [2, "always"], // require or disallow use of semicolons instead of ASI
     "semi-spacing": [2, {
