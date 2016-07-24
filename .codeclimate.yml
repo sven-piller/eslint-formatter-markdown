@@ -1,0 +1,15 @@
+engines: 
+  eslint:
+    enabled: true
+    config:
+        config: .eslintrc.json
+
+ratings:
+  paths:
+  - markdown.js
+exclude_paths:
+- coverage/**/*
+- doc/**/*
+- node_modules/**/*
+- templates/**/*
+- test/**/*

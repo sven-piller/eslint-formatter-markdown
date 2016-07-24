@@ -284,8 +284,6 @@ module.exports = function (results) {
   var totalWarnings = 0;
   var stats = getStats(results);
 
-  // console.log(stats);
-
   // Iterate over results to get totals
   results.forEach(function (result) {
     totalErrors += result.errorCount;

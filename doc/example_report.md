@@ -1,36 +1,67 @@
-# ESLint Report - Warning
+# ESLint Report - Error
 
 ## Summary
 
-15 problems (0 errors, 15 warnings)
+9 problems (2 errors, 7 warnings)
+
+### Errors
+
+| rule | count | visual |
+| --- | --- | --- |
+| quotes | 2 | XX |
+
+### Warnings
+
+| rule | count | visual |
+| --- | --- | --- |
+| max-len | 1 | X |
+| no-trailing-spaces | 4 | XXXX |
+| indent | 2 | XX |
+
+
 
 ## Details
 
 
-### e:\git\eslint-formatter-markdown\index.js - 0 problems
-
-
-### e:\git\eslint-formatter-markdown\markdown.js - 15 problems (0 errors, 15 warnings)
+### e:\git\eslint-formatter-markdown\test\fixtures\orange_file.js - 4 problems (1 error, 3 warnings)
 
 | Type | Line | Description | Rule |
 | --- | --- | --- | --- |
-| ```Warning``` | 16:36 | Unexpected sync method: &#39;readFileSync&#39;. | [no-sync](http://eslint.org/docs/rules/no-sync) |
-| ```Warning``` | 17:38 | Unexpected sync method: &#39;readFileSync&#39;. | [no-sync](http://eslint.org/docs/rules/no-sync) |
-| ```Warning``` | 18:1 | Line 18 exceeds the maximum line length of 120. | [max-len](http://eslint.org/docs/rules/max-len) |
-| ```Warning``` | 18:43 | Unexpected sync method: &#39;readFileSync&#39;. | [no-sync](http://eslint.org/docs/rules/no-sync) |
-| ```Warning``` | 19:1 | Line 19 exceeds the maximum line length of 120. | [max-len](http://eslint.org/docs/rules/max-len) |
-| ```Warning``` | 19:40 | Unexpected sync method: &#39;readFileSync&#39;. | [no-sync](http://eslint.org/docs/rules/no-sync) |
-| ```Warning``` | 42:1 | Line 42 exceeds the maximum line length of 120. | [max-len](http://eslint.org/docs/rules/max-len) |
-| ```Warning``` | 98:31 | Missing function expression name. | [func-names](http://eslint.org/docs/rules/func-names) |
-| ```Warning``` | 99:5 | Split &#39;var&#39; declarations into multiple statements. | [one-var](http://eslint.org/docs/rules/one-var) |
-| ```Warning``` | 100:7 | Expected indentation of 8 space characters but found 6. | [indent](http://eslint.org/docs/rules/indent) |
-| ```Warning``` | 122:30 | Missing function expression name. | [func-names](http://eslint.org/docs/rules/func-names) |
-| ```Warning``` | 137:18 | Missing function expression name. | [func-names](http://eslint.org/docs/rules/func-names) |
-| ```Warning``` | 138:3 | Split &#39;var&#39; declarations into multiple statements. | [one-var](http://eslint.org/docs/rules/one-var) |
-| ```Warning``` | 139:5 | Expected indentation of 6 space characters but found 4. | [indent](http://eslint.org/docs/rules/indent) |
-| ```Warning``` | 145:19 | Missing function expression name. | [func-names](http://eslint.org/docs/rules/func-names) |
+| ```Error``` | 13:10 | Strings must use singlequote. | [quotes](http://eslint.org/docs/rules/quotes) |
+| ```Warning``` | 11:20 | Trailing spaces not allowed. | [no-trailing-spaces](http://eslint.org/docs/rules/no-trailing-spaces) |
+| ```Warning``` | 13:3 | Expected indentation of 4 space characters but found 2. | [indent](http://eslint.org/docs/rules/indent) |
+| ```Warning``` | 13:20 | Trailing spaces not allowed. | [no-trailing-spaces](http://eslint.org/docs/rules/no-trailing-spaces) |
+
+### e:\git\eslint-formatter-markdown\test\fixtures\red_file.js - 1 problem (1 error, 0 warnings)
+
+| Type | Line | Description | Rule |
+| --- | --- | --- | --- |
+| ```Error``` | 13:12 | Strings must use singlequote. | [quotes](http://eslint.org/docs/rules/quotes) |
+
+### e:\git\eslint-formatter-markdown\markdown.js - 1 problem (0 errors, 1 warning)
+
+| Type | Line | Description | Rule |
+| --- | --- | --- | --- |
+| ```Warning``` | 54:1 | Line 54 exceeds the maximum line length of 120. | [max-len](http://eslint.org/docs/rules/max-len) |
+
+### e:\git\eslint-formatter-markdown\test\fixtures\yellow_file.js - 3 problems (0 errors, 3 warnings)
+
+| Type | Line | Description | Rule |
+| --- | --- | --- | --- |
+| ```Warning``` | 11:20 | Trailing spaces not allowed. | [no-trailing-spaces](http://eslint.org/docs/rules/no-trailing-spaces) |
+| ```Warning``` | 13:3 | Expected indentation of 4 space characters but found 2. | [indent](http://eslint.org/docs/rules/indent) |
+| ```Warning``` | 13:20 | Trailing spaces not allowed. | [no-trailing-spaces](http://eslint.org/docs/rules/no-trailing-spaces) |
+
+### e:\git\eslint-formatter-markdown\index.js - 0 problems
+
+
+### e:\git\eslint-formatter-markdown\test\fixtures\green_file.js - 0 problems
+
+
+### e:\git\eslint-formatter-markdown\test\markdown.spec.js - 0 problems
+
 
 ---
 
-Generated on Sat Jun 25 2016 10:55:13 GMT+0200 (Mitteleuropäische Sommerzeit)
+Generated on Sun Jun 26 2016 03:00:04 GMT+0200 (Mitteleuropäische Sommerzeit)
 
