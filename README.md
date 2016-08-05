@@ -5,10 +5,11 @@ Markdown ESLint formatter (reporter)
 [![Build Status](https://travis-ci.org/sven-piller/eslint-formatter-markdown.png?branch=master)](https://travis-ci.org/sven-piller/eslint-formatter-markdown)
 [![npm version](https://img.shields.io/npm/v/eslint-formatter-markdown.svg)](https://www.npmjs.com/package/eslint-formatter-markdown)
 [![Downloads/month](https://img.shields.io/npm/dm/eslint-formatter-markdown.svg)](https://www.npmjs.com/package/eslint-formatter-markdown)
-[![Dependency Status](https://david-dm.org/sven-piller/eslint-formatter-markdown.svg)](https://david-dm.org/sven-piller/eslint-formatter-markdown)
+[![Dependency Status](https://david-dm.org/sven-piller/eslint-formatter-markdown/status.svg)](https://david-dm.org/sven-piller/eslint-formatter-markdown)
+[![devDependency Status](https://david-dm.org/sven-piller/eslint-formatter-markdown/dev-status.svg)](https://david-dm.org/sven-piller/eslint-formatter-markdown?type=dev)
 [![Coverage Status](https://coveralls.io/repos/github/sven-piller/eslint-formatter-markdown/badge.svg?branch=master)](https://coveralls.io/github/sven-piller/eslint-formatter-markdown?branch=master)
-[![Code Climate](https://codeclimate.com/github/sven-piller/eslint-formatter-markdown/badges/gpa.svg)](https://codeclimate.com/github/sven-piller/eslint-formatter-markdown)
-[![Issue Count](https://codeclimate.com/github/sven-piller/eslint-formatter-markdown/badges/issue_count.svg)](https://codeclimate.com/github/sven-piller/eslint-formatter-markdown)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/sven-piller/eslint-formatter-markdown/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/sven-piller/eslint-formatter-markdown.svg?style=plastic)](https://github.com/sven-piller/eslint-formatter-markdown/issues)
 
 ## Installation
 
