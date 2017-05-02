@@ -79,6 +79,7 @@ Feel free to contribute!
 
 ## Release History
 
+- 1.0.3 Updated Readme and DevDependencies
 - 1.0.2 Updated Readme and DevDependencies
 - 1.0.0 Release with Stats in Summary
 - 0.11.0 Added Sorting
