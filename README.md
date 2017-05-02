@@ -1,6 +1,6 @@
 # eslint-formatter-markdown
 
-Markdown ESLint formatter (reporter) 
+Markdown ESLint formatter (reporter)
 
 [![Build Status](https://travis-ci.org/sven-piller/eslint-formatter-markdown.png?branch=master)](https://travis-ci.org/sven-piller/eslint-formatter-markdown)
 [![npm version](https://img.shields.io/npm/v/eslint-formatter-markdown.svg)](https://www.npmjs.com/package/eslint-formatter-markdown)
@@ -10,6 +10,7 @@ Markdown ESLint formatter (reporter)
 [![Coverage Status](https://coveralls.io/repos/github/sven-piller/eslint-formatter-markdown/badge.svg?branch=master)](https://coveralls.io/github/sven-piller/eslint-formatter-markdown?branch=master)
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/sven-piller/eslint-formatter-markdown/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/sven-piller/eslint-formatter-markdown.svg?style=plastic)](https://github.com/sven-piller/eslint-formatter-markdown/issues)
+[![Greenkeeper badge](https://badges.greenkeeper.io/sven-piller/eslint-formatter-markdown.svg)](https://greenkeeper.io/)
 
 ## Installation
 
@@ -23,13 +24,13 @@ npm install eslint-formatter-markdown --save-dev
 
 Use it with:
 
-#### ESLint CLI
+### ESLint CLI
 
 ```bash
 eslint --format node_modules/eslint-formatter-markdown/markdown.js file.js
 ```
 
-#### [grunt-eslint](https://github.com/sindresorhus/grunt-eslint/)
+### [grunt-eslint](https://github.com/sindresorhus/grunt-eslint/)
 
 ```js
 grunt.initConfig({
@@ -46,6 +47,7 @@ grunt.registerTask('default', ['eslint']);
 ```
 
 ### Example Output (rendered by github)
+
 ![Example report](/doc/example_report.png)
 
 ## Tests
