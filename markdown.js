@@ -51,7 +51,9 @@ function renderSummary(totalErrors, totalWarnings) {
   var renderedText = totalProblems + ' ' + pluralize('problem', totalProblems);
 
   if (totalProblems !== 0) {
-    renderedText += ' (' + totalErrors + ' ' + pluralize('error', totalErrors) + ', ' + totalWarnings + ' ' + pluralize('warning', totalWarnings) + ')';
+    var resTotalErrors = totalErrors + ' ' + pluralize('error', totalErrors);
+    var resTotalWarnings = totalWarnings + ' ' + pluralize('warning', totalWarnings);
+    renderedText += ' (' + resTotalErrors + ', ' + resTotalWarnings + ')';
   }
   return renderedText;
 }
