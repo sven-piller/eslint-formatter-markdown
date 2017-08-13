@@ -58,7 +58,8 @@ npm test
 ```
 
 Tested with ESLint@2 under node 0.12 - 6.3.* .
-After changing to ESLint@3 tests with node 0.12 are failing because of lamda functions.
+
+After changing to ESLint@3 tests with node 0.12 are failing because of lambda functions.
 
 ## Dependencies
 
@@ -79,6 +80,7 @@ Feel free to contribute!
 
 ## Release History
 
+- 1.0.4 Updated Readme and DevDependencies
 - 1.0.3 Updated Readme and DevDependencies
 - 1.0.2 Updated Readme and DevDependencies
 - 1.0.0 Release with Stats in Summary

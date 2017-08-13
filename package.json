@@ -1,6 +1,6 @@
 {
   "name": "eslint-formatter-markdown",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Markdown ESLint formatter (reporter)",
   "main": "index.js",
   "scripts": {
